@@ -43,8 +43,58 @@ def main():
      "executionTime": executionTime}
     resultList.append(result)
 
+    # EXECUTION 2
+    # Algorithm Configuration
+    maxIterations = 50
+    maxTabuCount = 15
+    maxCandidates = 50
+
+    # Execute the algorithm
+    startTime = time.time()
+    solution = search(berlin52,maxIterations, maxTabuCount, maxCandidates)
+    endTime = time.time()
+    executionTime = endTime - startTime
+
+    # Calculate algorithm efficacy in this execution
+    efficacy = round(float((solution["cost"] - optimalSolution)/optimalSolution),2)
+
+    # Round execution time and tour cost of the actual solution
+    executionTime = round(executionTime, 2)
+    tourCost = round(solution["cost"],2)
+
+    # We add the result data to the results list
+    result = {"maxIterations": maxIterations, "maxTabuCount": maxTabuCount,
+     "maxCandidates": maxCandidates, "solution": tourCost, "efficacy": efficacy,
+     "executionTime": executionTime}
+    resultList.append(result)
+
+    # EXECUTION 3
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 20
+    maxCandidates = 45
+
+    # Execute the algorithm
+    startTime = time.time()
+    solution = search(berlin52,maxIterations, maxTabuCount, maxCandidates)
+    endTime = time.time()
+    executionTime = endTime - startTime
+
+    # Calculate algorithm efficacy in this execution
+    efficacy = round(float((solution["cost"] - optimalSolution)/optimalSolution),2)
+
+    # Round execution time and tour cost of the actual solution
+    executionTime = round(executionTime, 2)
+    tourCost = round(solution["cost"],2)
+
+    # We add the result data to the results list
+    result = {"maxIterations": maxIterations, "maxTabuCount": maxTabuCount,
+     "maxCandidates": maxCandidates, "solution": tourCost, "efficacy": efficacy,
+     "executionTime": executionTime}
+    resultList.append(result)
+
     # Export all the results to a csv file
-    #TabuResultsHelper.exportResults(resultList,csvFilename)
+    TabuResultsHelper.exportResults(resultList,csvFilename)
 
     # We print the results
     TabuResultsHelper.printResults(resultList)
