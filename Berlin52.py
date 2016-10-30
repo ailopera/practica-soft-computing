@@ -1,9 +1,6 @@
-from TabuSearch import search
 import TabuResultsHelper
-import time
 
 def main():
-    # Vector = [1,2]
     # Problem Configuration
     berlin52 = [[565,575],[25,185],[345,750],[945,685],[845,655],
                 [880,660],[25,230],[525,1000],[580,1175],[650,1130],[1605,620],
@@ -18,87 +15,142 @@ def main():
     csvFilename = 'BerlinSolutions.csv'
     resultList = []
 
-    # EXECUTION 1
-    # Algorithm Configuration
-    maxIterations = 100
-    maxTabuCount = 15
-    maxCandidates = 50
+    # PRIMERA ESTRATEGIA: Objetivo: disminuir la diversidad
+    # - Aumentamos las penalizaciones Tabu
+    # - Disminuimos los candidatos que se generan en cada iteracion
+    # Cada vez le damos menos margen de variabilidad
 
-    # Execute the algorithm
-    startTime = time.time()
-    solution = search(berlin52,maxIterations, maxTabuCount, maxCandidates)
-    endTime = time.time()
-    executionTime = endTime - startTime
-
-    # Calculate algorithm efficacy in this execution
-    efficacy = round(float((solution["cost"] - optimalSolution)/optimalSolution),2)
-
-    # Round execution time and tour cost of the actual solution
-    executionTime = round(executionTime, 2)
-    tourCost = round(solution["cost"],2)
-
-    # We add the result data to the results list
-    result = {"maxIterations": maxIterations, "maxTabuCount": maxTabuCount,
-     "maxCandidates": maxCandidates, "solution": tourCost, "efficacy": efficacy,
-     "executionTime": executionTime}
-    resultList.append(result)
+    # # EXECUTION 1
+    # #Algorithm Configuration
+    # maxIterations = 100
+    # maxTabuCount = 15
+    # maxCandidates = 50
+    # # Execution
+    # result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    # resultList.append(result)
 
     # EXECUTION 2
     # Algorithm Configuration
-    maxIterations = 50
-    maxTabuCount = 15
-    maxCandidates = 50
-
-    # Execute the algorithm
-    startTime = time.time()
-    solution = search(berlin52,maxIterations, maxTabuCount, maxCandidates)
-    endTime = time.time()
-    executionTime = endTime - startTime
-
-    # Calculate algorithm efficacy in this execution
-    efficacy = round(float((solution["cost"] - optimalSolution)/optimalSolution),2)
-
-    # Round execution time and tour cost of the actual solution
-    executionTime = round(executionTime, 2)
-    tourCost = round(solution["cost"],2)
-
-    # We add the result data to the results list
-    result = {"maxIterations": maxIterations, "maxTabuCount": maxTabuCount,
-     "maxCandidates": maxCandidates, "solution": tourCost, "efficacy": efficacy,
-     "executionTime": executionTime}
+    maxIterations = 100
+    maxTabuCount = 20
+    maxCandidates = 45
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
     resultList.append(result)
 
     # EXECUTION 3
     # Algorithm Configuration
     maxIterations = 100
-    maxTabuCount = 20
-    maxCandidates = 45
-
-    # Execute the algorithm
-    startTime = time.time()
-    solution = search(berlin52,maxIterations, maxTabuCount, maxCandidates)
-    endTime = time.time()
-    executionTime = endTime - startTime
-
-    # Calculate algorithm efficacy in this execution
-    efficacy = round(float((solution["cost"] - optimalSolution)/optimalSolution),2)
-
-    # Round execution time and tour cost of the actual solution
-    executionTime = round(executionTime, 2)
-    tourCost = round(solution["cost"],2)
-
-    # We add the result data to the results list
-    result = {"maxIterations": maxIterations, "maxTabuCount": maxTabuCount,
-     "maxCandidates": maxCandidates, "solution": tourCost, "efficacy": efficacy,
-     "executionTime": executionTime}
+    maxTabuCount = 25
+    maxCandidates = 40
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
     resultList.append(result)
+
+    # EXECUTION 4
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 30
+    maxCandidates = 35
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+
+    # SEGUNDA ESTRATEGIA: Objetivo: aumentar la diversidad
+    # - Disminuimos las penalizaciones Tabu
+    # - Aumentamos los candidatos que se generan en cada iteracion a 52, y lo dejamos fijo
+
+    # EXECUTION 5
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 12
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 6
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 10
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 7
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 7
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 8
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 5
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 9
+    # Algorithm Configuration
+    maxIterations = 100
+    maxTabuCount = 3
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # TERCERA ESTRATEGIA: Objetivo: optimizar las mejores configuraciones
+    # - Disminuimos/aumentamos el numero de iteraciones en las mejores configuraciones
+
+    # EXECUTION 10
+    # Algorithm Configuration
+    maxIterations = 70
+    maxTabuCount = 3
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 11
+    # Algorithm Configuration
+    maxIterations = 50
+    maxTabuCount = 3
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 12
+    # Algorithm Configuration
+    maxIterations = 120
+    maxTabuCount = 3
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+    # EXECUTION 13
+    # Algorithm Configuration
+    maxIterations = 150
+    maxTabuCount = 3
+    maxCandidates = 52
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
 
     # Export all the results to a csv file
     TabuResultsHelper.exportResults(resultList,csvFilename)
 
     # We print the results
     TabuResultsHelper.printResults(resultList)
-
 
 
 
