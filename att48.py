@@ -112,6 +112,7 @@ def main():
     # TERCERA ESTRATEGIA: Objetivo: optimizar las mejores configuraciones
     # - Disminuimos/aumentamos el numero de iteraciones en las mejores configuraciones
 
+    # Mejor solucion segunda estrategia
     # EXECUTION 10
     # Algorithm Configuration
     maxIterations = 70
@@ -148,6 +149,25 @@ def main():
     result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
     resultList.append(result)
 
+    # Mejor solucion primera estrategia
+    # EXECUTION 14
+    # Algorithm Configuration
+    maxIterations = 120
+    maxTabuCount = 20
+    maxCandidates = 45
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
+
+
+    # EXECUTION 15
+    # Algorithm Configuration
+    maxIterations = 150
+    maxTabuCount = 20
+    maxCandidates = 45
+    # Execution
+    result = TabuResultsHelper.tabuSearch(berlin52, maxIterations,maxTabuCount, maxCandidates, optimalSolution)
+    resultList.append(result)
 
     # Export all the results to a csv file
     TabuResultsHelper.exportResults(resultList,csvFilename)
