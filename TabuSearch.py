@@ -53,13 +53,18 @@ def isTabu(perm, tabuList):
 
 def generateCandidates(best, tabuList, points):
     permutation, edges, result = None, None, {}
-    while permutation == None or isTabu(best["permutation"], tabuList):
+
+    # We try a permutation until we find one that is not a Tabu move
+    while permutation == None or isTabu(permutation, tabuList):
         permutation, edges = stochasticTwoOptWithEdges(best["permutation"])
+
     candidate ={}
     candidate["permutation"] = permutation
+    #print ">>>> Permutation len: " + str(len(permutation))
     candidate["cost"] = tourCost(candidate["permutation"])
     result["candidate"] = candidate
     result["edges"] = edges
+
     return result
 
 def search(points, maxIterations, maxTabu, maxCandidates):
@@ -68,6 +73,10 @@ def search(points, maxIterations, maxTabu, maxCandidates):
     best["permutation"] = constructInitialSolution(points)
     best["cost"] = tourCost(best["permutation"])
     tabuList =[]
+    iterations = maxIterations
+    lastCandidate = []
+    candidateStability = 0
+
     while maxIterations>0:
         # Generate candidates using stocahstic 2-opt near current best candidate
         # Use Tabu list to not revisit previous rewired edges
@@ -78,6 +87,8 @@ def search(points, maxIterations, maxTabu, maxCandidates):
         # sort the list of candidates by cost
         # since it is an  involved sort, we write a function for getting the least cost candidate
         bestCandidate, bestCandidateEdges = locateBestCandidate(candidates)
+        #print "Best Candidate: " + str(bestCandidate)
+        #print "Best Candidate edges: " + str(bestCandidateEdges)
         # compare with current best and update if necessary
         if bestCandidate["cost"] < best["cost"]:
             # set current to the best, so thatwe can continue iteration
@@ -87,6 +98,24 @@ def search(points, maxIterations, maxTabu, maxCandidates):
                 if len(tabuList) < maxTabu:
                     tabuList.append(edge)
 
+        # # Keep track of cycles in the execution
+        # if best == lastCandidate:
+        #     candidateStability +=1
+        # else:
+        #     candidateStability = 0
+        #     lastCandidate = best
+        #
+        # # Check for cycles in the execution
+        # if candidateStability > 5:
+        #     iterations = maxIterations
+        #     maxIterations = 0
+        # else:
+        #     maxIterations -=1
         maxIterations -=1
-
+        # print ">>> DEBUG: best cost: " + str(best["cost"])
+        # print ">>> DEBUG: permutation len: " + str(len(best["permutation"]))
+        # print ">>> DEBUG: MaxIterations: " + str(maxIterations)
+        # print ">>>>>>>>>> DEBUG: candidateStability: " + str(candidateStability)
+    print "----------------------------------------------------"
+    best["iterations"] = iterations
     return best

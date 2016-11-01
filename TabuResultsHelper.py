@@ -44,6 +44,7 @@ def printResults(resultList):
     for result in resultList:
         print "PARAMETERS"
         print "- maxIterations: " + str(result["maxIterations"])
+        # print "- Real Iterations: " + str(result["iterations"])
         print "- maxTabuCount: " + str(result["maxTabuCount"])
         print "- maxCandidates: " + str(result["maxCandidates"])
         print "-------------------------------------------------"
