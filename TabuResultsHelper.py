@@ -3,7 +3,6 @@ import time
 import csv
 
 # TabuResultsHelper Proporciona metodos para exportar las soluciones al csv
-
 def tabuSearch(nodes, maxIterations, maxTabuCount, maxCandidates, optimalSolution):
 
     # Execute the algorithm

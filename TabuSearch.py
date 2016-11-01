@@ -116,6 +116,6 @@ def search(points, maxIterations, maxTabu, maxCandidates):
         # print ">>> DEBUG: permutation len: " + str(len(best["permutation"]))
         # print ">>> DEBUG: MaxIterations: " + str(maxIterations)
         # print ">>>>>>>>>> DEBUG: candidateStability: " + str(candidateStability)
-    print "----------------------------------------------------"
+    # print "----------------------------------------------------"
     best["iterations"] = iterations
     return best
