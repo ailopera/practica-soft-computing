@@ -1,3 +1,8 @@
+''' a280.py: Programa para generar las soluciones del problema a280
+    en base a las estrategias/configuraciones definidas.
+    @author: Ana Isabel Lopera Martinez
+    @author: Pedro del Pozo Jimenez
+'''
 import TabuResultsHelper
 
 def main():

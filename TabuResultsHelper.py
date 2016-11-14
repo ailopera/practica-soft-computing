@@ -1,3 +1,8 @@
+''' TabuResultsHelper. Proporciona metodos auxiliares para la ejecucion,
+    exportacion, o informacion sobre la busqueda tabu.
+    @author: Ana Isabel Lopera Martinez
+    @author: Pedro del Pozo Jimenez
+'''
 from TabuSearch import search
 import time
 import csv

@@ -1,3 +1,8 @@
+''' berlin52.py: Programa para generar las soluciones del problema berlin52
+    en base a las estrategias/configuraciones definidas.
+    @author: Ana Isabel Lopera Martinez
+    @author: Pedro del Pozo Jimenez
+'''
 import TabuResultsHelper
 
 def main():
