@@ -18,7 +18,8 @@ berlin_fase4 <- datos_berlin[37:48,]
 plot_berlin <- plot_ly(berlin_fase1, x = berlin_fase1$executionTime, y = berlin_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
 plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase2, x = berlin_fase2$executionTime, y = berlin_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
 plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase3, x = berlin_fase3$executionTime, y = berlin_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
-add_trace(p = plot_berlin, data = berlin_fase4, x = berlin_fase4$executionTime, y = berlin_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase4, x = berlin_fase4$executionTime, y = berlin_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_berlin, data = datos_berlin, x = c(0,max(datos_berlin$executionTime)), y = c(7542,7542), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
 
 #Visualización de att48
 att48_fase1 <- datos_att48[1:12,]
@@ -29,7 +30,8 @@ att48_fase4 <- datos_att48[37:48,]
 plot_att48 <- plot_ly(att48_fase1, x = att48_fase1$executionTime, y = att48_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
 plot_att48 <- add_trace(p = plot_att48, data = att48_fase2, x = att48_fase2$executionTime, y = att48_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
 plot_att48 <- add_trace(p = plot_att48, data = att48_fase3, x = att48_fase3$executionTime, y = att48_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
-add_trace(p = plot_att48, data = att48_fase4, x = att48_fase4$executionTime, y = att48_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+plot_att48 <- add_trace(p = plot_att48, data = att48_fase4, x = att48_fase4$executionTime, y = att48_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_att48, data = datos_att48, x = c(0,max(datos_att48$executionTime)), y = c(10628,10628), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
 
 #Visualización de a280
 a280_fase1 <- datos_a280[1:12,]
@@ -40,5 +42,5 @@ a280_fase4 <- datos_a280[37:48,]
 plot_a280 <- plot_ly(a280_fase1, x = a280_fase1$executionTime, y = a280_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
 plot_a280 <- add_trace(p = plot_a280, data = a280_fase2, x = a280_fase2$executionTime, y = a280_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
 plot_a280 <- add_trace(p = plot_a280, data = a280_fase3, x = a280_fase3$executionTime, y = a280_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
-add_trace(p = plot_att48, data = a280_fase4, x = a280_fase4$executionTime, y = a280_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
-
+plot_a280 <- add_trace(p = plot_a280, data = a280_fase4, x = a280_fase4$executionTime, y = a280_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_a280, data = datos_a280, x = c(0,max(datos_a280$executionTime)), y = c(2579,2579), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
