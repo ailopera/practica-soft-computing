@@ -3,45 +3,44 @@ library(ggplot2)
 library(graphics)
 library(plotly)
 
-#Esto es una prueba con numeros aleatorios para generar un linechar, se debería hacer con los csv generados desde python
 
 
-datos_Tabu = read.csv("BerlinSolutions2.csv", header = TRUE)
+datos_berlin = read.csv("BerlinSolutions.csv", header = TRUE)
+datos_att48 = read.csv("att48Solutions.csv", header = TRUE)
+datos_a280 = read.csv("a280Solutions.csv", header = TRUE)
 
-#datos_TabuNormalizados = datos_Tabu[, datos_Tabu$maxIterations/max(datos_Tabu$maxIterations)]
+#Visualización de Berlin
+berlin_fase1 <- datos_berlin[1:12,]
+berlin_fase2 <- datos_berlin[13:24,]
+berlin_fase3 <- datos_berlin[25:36,]
+berlin_fase4 <- datos_berlin[37:48,]
 
-datos_TabuEnOrden <- datos_Tabu[with(datos_Tabu, order(datos_Tabu$executionTime)), ]
+plot_berlin <- plot_ly(berlin_fase1, x = berlin_fase1$executionTime, y = berlin_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
+plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase2, x = berlin_fase2$executionTime, y = berlin_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
+plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase3, x = berlin_fase3$executionTime, y = berlin_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
+plot_berlin <- add_trace(p = plot_berlin, data = berlin_fase4, x = berlin_fase4$executionTime, y = berlin_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_berlin, data = datos_berlin, x = c(0,max(datos_berlin$executionTime)), y = c(7542,7542), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
 
-datos_TabuNormalizados <- datos_Tabu
+#Visualización de att48
+att48_fase1 <- datos_att48[1:12,]
+att48_fase2 <- datos_att48[13:24,]
+att48_fase3 <- datos_att48[25:36,]
+att48_fase4 <- datos_att48[37:48,]
 
-for(i in 1:length(datos_TabuNormalizados)){
-  datos_TabuNormalizados[, i] <- datos_TabuNormalizados[, i]/max(datos_TabuNormalizados[, i])
-}
+plot_att48 <- plot_ly(att48_fase1, x = att48_fase1$executionTime, y = att48_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
+plot_att48 <- add_trace(p = plot_att48, data = att48_fase2, x = att48_fase2$executionTime, y = att48_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
+plot_att48 <- add_trace(p = plot_att48, data = att48_fase3, x = att48_fase3$executionTime, y = att48_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
+plot_att48 <- add_trace(p = plot_att48, data = att48_fase4, x = att48_fase4$executionTime, y = att48_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_att48, data = datos_att48, x = c(0,max(datos_att48$executionTime)), y = c(10628,10628), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
 
-datos_TabuNormalizados[, "indice"] <- c(1:12)
+#Visualización de a280
+a280_fase1 <- datos_a280[1:12,]
+a280_fase2 <- datos_a280[13:24,]
+a280_fase3 <- datos_a280[25:36,]
+a280_fase4 <- datos_a280[37:48,]
 
-#x <- c(1:100)
-#random_y <- rnorm(100, mean = 0)
-#data <- data.frame(x, random_y)
-
-#pruebaGrafico1 <- plot_ly(datos_TabuNormalizados, x = datos_TabuNormalizados$executionTime, y = datos_TabuNormalizados$solution, type = 'scatter', mode = 'lines+markers')
-
-#pruebaPlot1 <- plot_ly(datos_TabuNormalizados, name = 'executionTime', x = datos_TabuNormalizados$executionTime, y = datos_TabuNormalizados$solution, type = 'scatter', mode = 'markers')
-
-pruebaPlot1 <- plot_ly(datos_TabuNormalizados, name = 'executionTime', x = datos_TabuNormalizados$executionTime, y = datos_TabuNormalizados$efficacy, type = 'scatter', mode = 'markers', symbol = datos_TabuNormalizados$indice, symbols = c(1:12))
-pruebaPlot1 <- add_trace(p = pruebaPlot1, data = datos_TabuNormalizados, x = datos_TabuNormalizados$maxIterations, name = 'maxIterations', type = 'scatter', mode = 'markers')
-pruebaPlot1 <- add_trace(p = pruebaPlot1, data = datos_TabuNormalizados, x = datos_TabuNormalizados$maxTabuCount, name = 'maxIteramaxTabuCounttions', type = 'scatter', mode = 'markers')
-pruebaPlot1 <- add_trace(p = pruebaPlot1, data = datos_TabuNormalizados, x = datos_TabuNormalizados$maxCandidates, name = 'maxCandidates', type = 'scatter', mode = 'markers')
-add_trace(p = pruebaPlot1, data = datos_TabuNormalizados, x = datos_TabuNormalizados$efficacy, name = 'efficacy', type = 'scatter', mode = 'markers')
-#add_trace(p = pruebaPlot1, data = datos_TabuNormalizados, x = datos_TabuNormalizados$solution, name = 'solution', type = 'scatter', mode = 'markers')
-
-
-
-#pruebaPlot2 <- plot_ly(datos_TabuNormalizados, name = 'fila1', x = datos_TabuNormalizados[1,], y = datos_TabuNormalizados$efficacy, type = 'scatter', mode = 'markers', color = I('black'))
-#pruebaPlot2 <- add_trace(p = pruebaPlot2, data = datos_TabuNormalizados, x = datos_TabuNormalizados[2,], name = 'fila2', type = 'scatter', mode = 'markers')
-#pruebaPlot2 <- add_trace(p = pruebaPlot2, data = datos_TabuNormalizados, x = datos_TabuNormalizados[3, ], name = 'fila3', type = 'scatter', mode = 'markers')
-#add_trace(p = pruebaPlot2, data = datos_TabuNormalizados, x = datos_TabuNormalizados[4, ], name = 'fila4', type = 'scatter', mode = 'markers')
-
-
-
-
+plot_a280 <- plot_ly(a280_fase1, x = a280_fase1$executionTime, y = a280_fase1$solution, type = 'scatter', name ='estrategia 1', mode = 'markers', color = I('red'))
+plot_a280 <- add_trace(p = plot_a280, data = a280_fase2, x = a280_fase2$executionTime, y = a280_fase2$solution, name = 'estrategia 2', type = 'scatter', mode = 'markers', color = I('pink'))
+plot_a280 <- add_trace(p = plot_a280, data = a280_fase3, x = a280_fase3$executionTime, y = a280_fase3$solution, name = 'estrategia 3', type = 'scatter', mode = 'markers', color = I('purple'))
+plot_a280 <- add_trace(p = plot_a280, data = a280_fase4, x = a280_fase4$executionTime, y = a280_fase4$solution, name = 'estrategia 4', type = 'scatter', mode = 'markers', color = I('blue'))
+add_trace(p = plot_a280, data = datos_a280, x = c(0,max(datos_a280$executionTime)), y = c(2579,2579), name = 'solucion exacta', type = 'scatter', mode = 'lines', color = I('black'))
